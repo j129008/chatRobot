@@ -7,12 +7,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
+// import android.widget.ImageView;
 import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity {
-    ImageView image;
+    // ImageView image;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +49,11 @@ public class MainActivity extends ActionBarActivity {
         Intent intent = new Intent(this, DisplayMessageActivity.class);
         EditText editText = (EditText) findViewById(R.id.edit_message);
         String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
+        if(message.equals("vc") ){
+            intent.putExtra(EXTRA_MESSAGE, "Guitar God Jimi Hendrix!");
+        }else {
+            intent.putExtra(EXTRA_MESSAGE, message);
+        }
         startActivity(intent);
     }
 
