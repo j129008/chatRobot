@@ -7,10 +7,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity {
+    ImageView image;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        // image = (ImageView) findViewById(R.id.imageView1);
+
+    }
+
+
     private void openSearch() {
         Toast.makeText(this, "Search button pressed", Toast.LENGTH_SHORT).show();
     }
@@ -41,12 +52,6 @@ public class MainActivity extends ActionBarActivity {
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }
-
-   @Override
-   protected void onCreate(Bundle savedInstanceState) {
-      super.onCreate(savedInstanceState);
-      setContentView(R.layout.activity_main);
-   }
 
 
    @Override
