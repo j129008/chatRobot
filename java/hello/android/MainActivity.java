@@ -7,23 +7,31 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-// import android.widget.ImageView;
 import android.widget.Toast;
+import android.speech.tts.TextToSpeech;
 
 
 public class MainActivity extends ActionBarActivity {
-    // ImageView image;
+    TextToSpeech mTTS;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // image = (ImageView) findViewById(R.id.imageView1);
-
+        mTTS = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status != TextToSpeech.ERROR) {
+                    System.out.print("init success");
+                }
+            }
+        });
     }
 
 
     private void openSearch() {
         Toast.makeText(this, "Search button pressed", Toast.LENGTH_SHORT).show();
+        String myString = "don't press it";
+        mTTS.speak(myString, mTTS.QUEUE_ADD, null,"id");
     }
     private void openSettings(){
         Toast.makeText(this, "Setting button pressed", Toast.LENGTH_SHORT).show();
