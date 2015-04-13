@@ -1,17 +1,27 @@
 package hello.android;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.speech.RecognizerIntent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.speech.tts.TextToSpeech;
+
+import java.util.ArrayList;
 import java.util.Locale;
 
 
 public class MainActivity extends ActionBarActivity {
     TextToSpeech mTTS;
+    private static final int RQS_VOICE_RECOGNITION = 100;
+    TextView textResult;
+    String setting = "設定";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +34,31 @@ public class MainActivity extends ActionBarActivity {
                 }
             }
         });
+        Button buttonSpeech = (Button) findViewById(R.id.Speech);
+        textResult = (TextView) findViewById(R.id.Result);
+        buttonSpeech.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+                intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Start Speech");
+                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+                try {
+                    startActivityForResult(intent, RQS_VOICE_RECOGNITION);
+                }catch (ActivityNotFoundException a) {
+
+                }
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == RQS_VOICE_RECOGNITION) {
+            if (resultCode == RESULT_OK) {
+                ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+            }
+        }
     }
 
 
@@ -58,7 +93,5 @@ public class MainActivity extends ActionBarActivity {
       getMenuInflater().inflate(R.menu.menu_main, menu);
       return true;
    }
-
-
 
 }
