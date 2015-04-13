@@ -27,21 +27,15 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-    private void openSearch() {
-        Toast.makeText(this, "Search button pressed", Toast.LENGTH_SHORT).show();
-    }
-    private void openSettings(){
-        Toast.makeText(this, "Setting button pressed", Toast.LENGTH_SHORT).show();
-    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.action_search:
-                openSearch();
+                Toast.makeText(this, "Search button pressed", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.action_settings:
-                openSettings();
+                Toast.makeText(this, "Setting button pressed", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
