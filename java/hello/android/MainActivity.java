@@ -1,6 +1,4 @@
 package hello.android;
-
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,7 +7,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.speech.tts.TextToSpeech;
-
 import java.util.Locale;
 
 
@@ -18,7 +15,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.main_activity);
         mTTS = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -54,7 +51,6 @@ public class MainActivity extends ActionBarActivity {
     public final static String EXTRA_MESSAGE = "com.mycompany.myfirstapp.MESSAGE";
     /** Called when the user clicks the Send button */
     public void sendMessage(View view) {
-        Intent intent = new Intent(this, DisplayMessageActivity.class);
         EditText editText = (EditText) findViewById(R.id.edit_message);
         String message = editText.getText().toString();
         mTTS.speak(message, mTTS.QUEUE_ADD, null,"id");
