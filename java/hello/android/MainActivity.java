@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.speech.tts.TextToSpeech;
 
+import java.util.Locale;
+
 
 public class MainActivity extends ActionBarActivity {
     TextToSpeech mTTS;
@@ -21,7 +23,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onInit(int status) {
                 if(status != TextToSpeech.ERROR) {
-                    System.out.print("init success");
+                    mTTS.setLanguage(Locale.ENGLISH);
                 }
             }
         });
@@ -30,8 +32,6 @@ public class MainActivity extends ActionBarActivity {
 
     private void openSearch() {
         Toast.makeText(this, "Search button pressed", Toast.LENGTH_SHORT).show();
-        String myString = "don't press it";
-        mTTS.speak(myString, mTTS.QUEUE_ADD, null,"id");
     }
     private void openSettings(){
         Toast.makeText(this, "Setting button pressed", Toast.LENGTH_SHORT).show();
@@ -57,12 +57,15 @@ public class MainActivity extends ActionBarActivity {
         Intent intent = new Intent(this, DisplayMessageActivity.class);
         EditText editText = (EditText) findViewById(R.id.edit_message);
         String message = editText.getText().toString();
+        mTTS.speak(message, mTTS.QUEUE_ADD, null,"id");
+    /*
         if(message.equals("vc") ){
             intent.putExtra(EXTRA_MESSAGE, "Guitar God Jimi Hendrix!");
         }else {
             intent.putExtra(EXTRA_MESSAGE, message);
         }
         startActivity(intent);
+        */
     }
 
 
