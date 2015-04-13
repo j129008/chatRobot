@@ -58,14 +58,7 @@ public class MainActivity extends ActionBarActivity {
         EditText editText = (EditText) findViewById(R.id.edit_message);
         String message = editText.getText().toString();
         mTTS.speak(message, mTTS.QUEUE_ADD, null,"id");
-    /*
-        if(message.equals("vc") ){
-            intent.putExtra(EXTRA_MESSAGE, "Guitar God Jimi Hendrix!");
-        }else {
-            intent.putExtra(EXTRA_MESSAGE, message);
-        }
-        startActivity(intent);
-        */
+
     }
 
 
