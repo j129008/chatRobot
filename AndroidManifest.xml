@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="hello.android" >
     <uses-sdk android:minSdkVersion="7"  android:targetSdkVersion="18" />
-
+    <uses-permission android:name="android.permission.INTERNET"/>
     <!-- The main/home activity (it has no parent activity) -->
     <application
         android:allowBackup="true"
