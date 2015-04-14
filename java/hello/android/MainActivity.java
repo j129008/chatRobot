@@ -44,7 +44,7 @@ public class MainActivity extends ActionBarActivity {
                 try {
                     startActivityForResult(intent, RQS_VOICE_RECOGNITION);
                 }catch (ActivityNotFoundException a) {
-                    mTTS.speak("I feel uncomfortable", TextToSpeech.QUEUE_FLUSH, null);
+                    mTTS.speak("我覺得不舒服", TextToSpeech.QUEUE_FLUSH, null);
                 }
             }
         });
@@ -52,23 +52,45 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        String react = "";
+        String userTalk = "";
         if (requestCode == RQS_VOICE_RECOGNITION) {
-            String react = "";
             if (resultCode == RESULT_OK) {
                 ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                String userTalk = result.get(0);
-                if(userTalk.contains("how")){
-                    react += "I am fine, thank you";
-                    mTTS.speak(react, TextToSpeech.QUEUE_FLUSH, null);
-                }else{
-                    mTTS.speak(react = "do you say "+userTalk+"?", TextToSpeech.QUEUE_FLUSH, null);
+                userTalk += result.get(0);
+
+                if(userTalk.contains("咖啡")) {
+                    react += "晚上喝咖啡會睡不好";
                 }
 
+                if(userTalk.contains("狗")) {
+                    react += "我最喜番小狗溝了";
+                }
+
+                if(userTalk.contains("美女")) {
+                    react += "我也是美女窩";
+                }
+
+                if(userTalk.contains("牛奶")) {
+                    react += "我最喜歡喝牛奶了";
+                }
+
+                if(userTalk.contains("笨蛋")) {
+                    react += "對不起我超笨";
+                }
+
+                if(userTalk.contains("几岁")) {
+                    react += "我今年五歲歲";
+                }
+
+                if(react.length()<=3) {
+                    react += userTalk + "是什麼意思";
+                }
+                mTTS.speak(react, TextToSpeech.QUEUE_FLUSH, null);
             }else{
-                mTTS.speak("I can't understand you", TextToSpeech.QUEUE_FLUSH, null);
+                mTTS.speak("對不起我沒聽到主人剛剛說什麼", TextToSpeech.QUEUE_FLUSH, null);
             }
-            Log.d("j129008",react);
+            Log.d("j129008",userTalk);
         }
     }
-
 }
