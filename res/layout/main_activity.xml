@@ -6,10 +6,9 @@
     <ImageView
         android:id="@+id/ImageView01"
         android:layout_width="300dp"
-        android:layout_height="400dp"
+        android:layout_height="300dp"
         android:layout_gravity="center"
         android:src="@drawable/chobits"/>
-
 
     <Button
         android:id="@+id/Speech"

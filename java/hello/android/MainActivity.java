@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.speech.RecognizerIntent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,8 +21,6 @@ import java.util.Locale;
 public class MainActivity extends ActionBarActivity {
     TextToSpeech mTTS;
     private static final int RQS_VOICE_RECOGNITION = 100;
-    TextView textResult;
-    String setting = "設定";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +43,6 @@ public class MainActivity extends ActionBarActivity {
                 intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
                 try {
                     startActivityForResult(intent, RQS_VOICE_RECOGNITION);
-                    mTTS.speak("hello my master", TextToSpeech.QUEUE_FLUSH, null);
                 }catch (ActivityNotFoundException a) {
                     mTTS.speak("I feel uncomfortable", TextToSpeech.QUEUE_FLUSH, null);
                 }
@@ -55,19 +53,21 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == RQS_VOICE_RECOGNITION) {
+            String react = "";
             if (resultCode == RESULT_OK) {
                 ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                 String userTalk = result.get(0);
-                String react = "";
                 if(userTalk.contains("how")){
                     react += "I am fine, thank you";
                     mTTS.speak(react, TextToSpeech.QUEUE_FLUSH, null);
                 }else{
-                    mTTS.speak("do you say"+userTalk+"?", TextToSpeech.QUEUE_FLUSH, null);
+                    mTTS.speak(react = "do you say "+userTalk+"?", TextToSpeech.QUEUE_FLUSH, null);
                 }
+
             }else{
-                mTTS.speak("I can't hear you", TextToSpeech.QUEUE_FLUSH, null);
+                mTTS.speak("I can't understand you", TextToSpeech.QUEUE_FLUSH, null);
             }
+            Log.d("j129008",react);
         }
     }
 
