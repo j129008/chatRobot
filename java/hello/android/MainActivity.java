@@ -41,12 +41,13 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View arg0) {
                 Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
                 intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-                intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Start Speech");
+                intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "請開始對話");
                 intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
                 try {
                     startActivityForResult(intent, RQS_VOICE_RECOGNITION);
+                    mTTS.speak("record start", TextToSpeech.QUEUE_FLUSH, null);
                 }catch (ActivityNotFoundException a) {
-
+                    mTTS.speak("record error", TextToSpeech.QUEUE_FLUSH, null);
                 }
             }
         });
@@ -57,6 +58,9 @@ public class MainActivity extends ActionBarActivity {
         if (requestCode == RQS_VOICE_RECOGNITION) {
             if (resultCode == RESULT_OK) {
                 ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                mTTS.speak("result success", TextToSpeech.QUEUE_FLUSH, null);
+            }else{
+                mTTS.speak("result error", TextToSpeech.QUEUE_FLUSH, null);
             }
         }
     }
