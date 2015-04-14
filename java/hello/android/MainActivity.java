@@ -35,7 +35,6 @@ public class MainActivity extends ActionBarActivity {
             }
         });
         Button buttonSpeech = (Button) findViewById(R.id.Speech);
-        textResult = (TextView) findViewById(R.id.Result);
         buttonSpeech.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View arg0) {
@@ -71,38 +70,5 @@ public class MainActivity extends ActionBarActivity {
             }
         }
     }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle presses on the action bar items
-        switch (item.getItemId()) {
-            case R.id.action_search:
-                Toast.makeText(this, "Search button pressed", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.action_settings:
-                Toast.makeText(this, "Setting button pressed", Toast.LENGTH_SHORT).show();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    public final static String EXTRA_MESSAGE = "com.mycompany.myfirstapp.MESSAGE";
-    /** Called when the user clicks the Send button */
-    public void sendMessage(View view) {
-        EditText editText = (EditText) findViewById(R.id.edit_message);
-        String message = editText.getText().toString();
-        mTTS.speak(message, TextToSpeech.QUEUE_FLUSH, null);
-
-    }
-
-
-   @Override
-   public boolean onCreateOptionsMenu(Menu menu) {
-      // Inflate the menu; this adds items to the action bar if it is present.
-      getMenuInflater().inflate(R.menu.menu_main, menu);
-      return true;
-   }
 
 }
